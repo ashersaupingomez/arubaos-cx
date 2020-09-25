@@ -1,0 +1,28 @@
+{
+  "name": "arubaos-cx",
+  "version": "1.0.0",
+  "description": "Superagent utilities for interacting with the ArubaOS-CX REST API",
+  "main": "lib",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashersaupingomez/arubaos-cx.git"
+  },
+  "author": "Asher Gomez <ashersaupingomez@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ashersaupingomez/arubaos-cx/issues"
+  },
+  "homepage": "https://github.com/ashersaupingomez/arubaos-cx#readme",
+  "dependencies": {
+    "superagent": "^6.1.0",
+    "superagent-prefix": "0.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}
