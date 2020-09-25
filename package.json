@@ -1,6 +1,6 @@
 {
   "name": "arubaos-cx",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Superagent utilities for interacting with the ArubaOS-CX REST API",
   "main": "lib",
   "scripts": {
