@@ -4,6 +4,7 @@
   "description": "Superagent utilities for interacting with the ArubaOS-CX REST API",
   "main": "lib",
   "scripts": {
+    "docs:build": "documentation readme lib --section=API",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
