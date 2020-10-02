@@ -3,9 +3,10 @@
 Superagent utilities for interacting with the ArubaOS-CX REST API
 
 ## Features
-* Based on [superagent](https://www.npmjs.com/package/superagent), a simple & robust http client with in-built cookie handling.
-* Simple & flexible API with few minimal moving parts.
-* Able to work with environment variables.
+
+-   Based on [superagent](https://www.npmjs.com/package/superagent), a simple & robust http client with in-built cookie handling.
+-   Simple & flexible API with few minimal moving parts.
+-   Able to work with environment variables.
 
 ## API
 
