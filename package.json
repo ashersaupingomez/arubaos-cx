@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ashersaupingomez/arubaos-cx.git"
+    "url": "git://github.com/ashersaupingomez/arubaos-cx.git"
   },
   "author": "Asher Gomez <ashersaupingomez@gmail.com>",
   "license": "MIT",
@@ -25,5 +25,8 @@
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
