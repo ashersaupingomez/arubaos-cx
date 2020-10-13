@@ -34,8 +34,8 @@ Create a client.
 
 #### Parameters
 
--   `host` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** IP address (optional, default `process.env.AUBRA_OS_CX_HOST`)
--   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** API version (optional, default `process.env.ARUBA_OS_CX_VERSION||'v1'`)
+-   `host` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Switch IP address (optional, default `process.env.AUBRA_OS_CX_HOST`)
+-   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Switch API version (optional, default `process.env.ARUBA_OS_CX_VERSION||'v1'`)
 
 #### Examples
 
@@ -99,10 +99,10 @@ Login a client, execute a function on the client, then logout the client.
 
 #### Parameters
 
--   `client` **superagent.Agent** ArubaOS-Switch REST API client
+-   `client` **superagent.Agent** 
 -   `fn` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
--   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Client username
--   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Client pasword
+-   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**  (optional, default `process.env.ARUBA_OS_CX_USERNAME||'admin'`)
+-   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**  (optional, default `process.env.ARUBA_OS_CX_PASSWORD||''`)
 
 #### Examples
 
