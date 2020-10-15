@@ -4,17 +4,15 @@ Superagent utilities for interacting with the ArubaOS-CX REST API
 
 ## Features
 
--   Based on [superagent](https://www.npmjs.com/package/superagent), a simple & robust http client with in-built cookie handling.
+-   Tested & working on REST API versions v1 & v10.04
+-   Based on [superagent.Agent](https://visionmedia.github.io/superagent/#agents-for-global-state), a simple & robust http client class with in-built cookie handling.
 -   Simple & flexible API with minimal moving parts.
 -   Able to work with environment variables.
 -   Super-lightweight package.
 
 ## Testing
 
-Tested & working on REST API versions:
-
--   v1
--   v10.04
+Tests are performed on actual ArubaOS-CX switches. Include the `ARUBA_OS_CX_HOST` environment variable, at minimum, along with any other of the mentioned environment variables.
 
 ```bash
 ARUBA_OS_CX_HOST=10.11.12.13 npm test
