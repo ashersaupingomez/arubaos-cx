@@ -1,26 +1,35 @@
 const baretest = require('baretest');
 const assert = require('assert');
+const { agent, Response } = require('superagent');
 
-const { createClient, useClient } = require('./lib');
 const { name } = require('./package');
+const {
+  createClient,
+  loginClient,
+  logoutClient,
+  useClient,
+} = require('./lib');
 
 const test = baretest(name);
 
-function getSystem(client) {
+function getPlatformName(client) {
   return client
-    .get('/system');
+    .get('/system')
+    .query({ attributes: 'platform_name' })
+    .then(({ body }) => body.platform_name);
 }
 
 const client = createClient();
 
-test('login, execute a function, then logout', async () => {
-  const { ok } = await useClient(client, getSystem);
+test('createClient', () => assert(client instanceof agent));
 
-  assert.ok(ok);
-});
+test('loginClient', () => loginClient(client)
+  .then((response) => assert(response instanceof Response)));
 
-test('fails to execute a function after logout', () => {
-  assert.rejects(() => getSystem(client));
-});
+test('logoutClient', () => logoutClient(client)
+  .then((response) => assert(response instanceof Response)));
+
+test('useClient', () => useClient(client, getPlatformName)
+  .then((platformName) => assert(typeof platformName === 'string')));
 
 test.run();
