@@ -12,10 +12,10 @@ Superagent utilities for interacting with the ArubaOS-CX REST API
 
 ## Getting Started
 
-```javscript
+```javascript
 const { createClient, useClient } = require('arubaos-cx');
 
-const getSystem = require('./getSystem);
+const getSystem = require('./getSystem');
 
 const system = await useClient(createClient(), getSystem);
 ```
