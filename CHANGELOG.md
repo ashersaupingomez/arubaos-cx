@@ -9,3 +9,6 @@
 - Removed: `disableTLSCerts()` from `createClient`
 - Removed: `loginClient` & `logoutClient` documentation, as they're rarely used
 - Removed: `superagent-prefix` package
+
+## 3.0.1
+- Fixed: non-null assert to `host` parameter in `createClient`

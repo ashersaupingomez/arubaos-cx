@@ -46,7 +46,7 @@ so only REST API endpoints are required.
 
 #### Parameters
 
--   `host` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** Switch IP address (typically) (optional, default `process.env.ARUBA_OS_CX_HOST`)
+-   `host` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Switch IP address (typically) (optional, default `process.env.ARUBA_OS_CX_HOST!`)
 -   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** ArubaOS-CX REST API version (optional, default `process.env.ARUBA_OS_CX_VERSION||'v1'`)
 
 #### Examples
