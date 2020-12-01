@@ -13,19 +13,17 @@ Superagent utilities for interacting with the ArubaOS-CX REST API
 ## Getting Started
 
 ```javascript
-const { createClient, useClient } = require('arubaos-cx');
+const { useClient } = require('arubaos-cx');
 
-const getSystem = require('./getSystem');
+function requestGetPlatformName(client) {
+  return client
+    .get('/system')
+    .query({ attributes: 'platform_name' });
+}
 
-const system = await useClient(createClient(), getSystem);
-```
-
-## Testing
-
-Tests are performed on an actual ArubaOS-CX switch whose credentials are defined by environment variables.
-
-```bash
-$ ARUBA_OS_CX_HOST=10.11.12.13 npm test
+useClient(requestGetPlatformName)
+  .then(console.log)
+  .catch(console.error);
 ```
 
 ## API
@@ -37,109 +35,72 @@ $ ARUBA_OS_CX_HOST=10.11.12.13 npm test
 -   [createClient](#createclient)
     -   [Parameters](#parameters)
     -   [Examples](#examples)
--   [loginClient](#loginclient)
+-   [useClient](#useclient)
     -   [Parameters](#parameters-1)
     -   [Examples](#examples-1)
--   [logoutClient](#logoutclient)
-    -   [Parameters](#parameters-2)
-    -   [Examples](#examples-2)
--   [useClient](#useclient)
-    -   [Parameters](#parameters-3)
-    -   [Examples](#examples-3)
 
 ### createClient
 
+Request URLs are prepended with the appropriate URL base,
+so only REST API endpoints are required.
+
 #### Parameters
 
--   `host` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** IP address of switch (optional, default `process.env.ARUBA_OS_CX_HOST`)
--   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** API version of ArubaOS-CX REST API (optional, default `process.env.ARUBA_OS_CX_VERSION||'v1'`)
+-   `host` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** Switch IP address (typically) (optional, default `process.env.ARUBA_OS_CX_HOST`)
+-   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** ArubaOS-CX REST API version (optional, default `process.env.ARUBA_OS_CX_VERSION||'v1'`)
 
 #### Examples
 
 ```javascript
-const client = createClient('10.11.12.13', 'v10.04');
+const client = createClient();
 ```
 
-Returns **superagent.agent** ArubaOS-CX REST API client with TLS checks ignored
+If certs hasn't been configured on the switch
 
-### loginClient
-
-Note: must be performed before any requests
-
-#### Parameters
-
--   `client` **superagent.agent** ArubaOS-CX REST API client
--   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Username of switch user (optional, default `process.env.ARUBA_OS_CX_USERNAME||'admin'`)
--   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Password of switch user (optional, default `process.env.ARUBA_OS_CX_PASSWORD||''`)
-
-#### Examples
 
 ```javascript
-await loginClient(client, 'rick', 'wubba lubba dub-dub');
+const client = createClient()
+  .disableTLSCerts();
 ```
 
-Returns **superagent.Request** Login request for ArubaOS-CX REST API
-
-### logoutClient
-
-Note: must be performed after requests
-
-#### Parameters
-
--   `client` **superagent.agent** ArubaOS-CX REST API client
-
-#### Examples
-
-```javascript
-await logout(client);
-```
-
-Returns **superagent.Request** Logout request for the ArubaOS-CX REST API
+Returns **any** ArubaOS-CX REST API client
 
 ### useClient
 
-Login a client, execute a function using the client, then logout the client,
-returning the value of the function.
-
-This is a simpler method than explicitly using `loginClient` & `logoutClient`,
-which is the typical workflow.
-
 #### Parameters
 
--   `client` **superagent.agent** ArubaOS-CX REST API client
--   `fn` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** Function which only accepts a `client` parameter
--   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Username of switch user (optional, default `process.env.ARUBA_OS_CX_USERNAME||'admin'`)
--   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Password of switch user (optional, default `process.env.ARUBA_OS_CX_PASSWORD||''`)
+-   `fn` **function (client: any): any** Function whose only parameter is `client`
+-   `client` **any** ArubaOS-CX REST API client (optional, default `createClient()`)
+-   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Switch username (optional, default `process.env.ARUBA_OS_CX_USERNAME||'admin'`)
+-   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Switch password (optional, default `process.env.ARUBA_OS_CX_PASSWORD||''`)
 
 #### Examples
 
-Define a function:
+First, define a function which accepts & uses the `client` paramter
 
 
 ```javascript
-function getSystem(client) {
+function requestGetPlatformName(client) {
   return client
     .get('/system')
-    .then(({ body }) => body);
+    .query({ attributes: 'platform_name' });
 }
 ```
 
-Pass `client` & the function into `useClient`:
+Then, use the `useClient` function which returns the resolved value of `fn`
 
 
 ```javascript
-const system = await useClient(client, getSystem, 'rick', 'wubba lubba dub-dub');
+const response = await useClient(requestGetPlatformName);
 ```
 
-This is equivalent to:
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;any>** Promise that resolves to the return value of `fn`
 
+## Testing
 
-```javascript
-await loginClient(client, 'rick', 'wubba lubba dub-dub');
+Tests are performed on an actual ArubaOS-CX switch whose credentials are defined by environment variables.
+These can be fed either via the command line or a `.env` file at the root of this package.
 
-const system = await getSystem(client);
-
-await logoutClient(client);
+```bash
+$ npm test
 ```
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;any>** Return value of `fn`

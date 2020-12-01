@@ -1,11 +1,18 @@
 {
   "name": "arubaos-cx",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Superagent utilities for interacting with the ArubaOS-CX REST API",
-  "main": "lib",
+  "main": "dist/cjs",
+  "module": "dist/esm",
   "scripts": {
-    "docs:build": "documentation readme lib --section=API",
-    "test": "node test"
+    "clean": "rm -rf dist",
+    "build:docs": "documentation readme src --section=API --parse-extension=ts",
+    "build:cjs": "tsc --outDir dist/cjs",
+    "build:esm": "tsc --outDir dist/esm --module es2020",
+    "build": "npm run build:cjs && npm run build:esm",
+    "clean-build": "npm run clean && npm run build",
+    "prepare": "npm run clean-build && npm run build:docs",
+    "test": "npm run clean-build && node dist/cjs/useClient.test"
   },
   "repository": {
     "type": "git",
@@ -18,14 +25,20 @@
   },
   "homepage": "https://github.com/ashersaupingomez/arubaos-cx#readme",
   "dependencies": {
-    "superagent": "^6.1.0",
-    "superagent-prefix": "0.0.2"
+    "superagent": "^6.1.0"
   },
   "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/baretest": "^2.0.0",
+    "@types/node": "^14.14.10",
+    "@types/superagent": "^4.1.10",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
     "baretest": "^2.0.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.9.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "typescript": "^4.1.2"
   }
 }
