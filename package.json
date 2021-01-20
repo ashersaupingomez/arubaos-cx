@@ -1,6 +1,6 @@
 {
   "name": "arubaos-cx",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Superagent utilities for interacting with the ArubaOS-CX REST API",
   "main": "dist/cjs",
   "module": "dist/esm",
@@ -30,13 +30,13 @@
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/baretest": "^2.0.0",
-    "@types/node": "^14.14.20",
+    "@types/node": "^14.14.22",
     "@types/superagent": "^4.1.10",
-    "@typescript-eslint/eslint-plugin": "^4.13.0",
-    "@typescript-eslint/parser": "^4.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
     "baretest": "^2.0.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.17.0",
+    "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "typescript": "^4.1.2"
