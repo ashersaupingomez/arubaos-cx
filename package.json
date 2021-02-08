@@ -1,6 +1,6 @@
 {
   "name": "arubaos-cx",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Superagent utilities for interacting with the ArubaOS-CX REST API",
   "main": "dist/cjs",
   "module": "dist/esm",

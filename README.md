@@ -69,7 +69,7 @@ Returns **any** ArubaOS-CX REST API client
 
 #### Parameters
 
--   `fn` **function (client: any): any** Function whose only parameter is `client`
+-   `fn` **function (client: any): [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;T>** Function whose only parameter is `client`
 -   `client` **any** ArubaOS-CX REST API client (optional, default `createClient()`)
 -   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Switch username (optional, default `process.env.ARUBA_OS_CX_USERNAME||'admin'`)
 -   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Switch password (optional, default `process.env.ARUBA_OS_CX_PASSWORD||''`)
@@ -94,7 +94,7 @@ Then, use the `useClient` function which returns the resolved value of `fn`
 const response = await useClient(requestGetPlatformName);
 ```
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;any>** Promise that resolves to the return value of `fn`
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;T>** Promise that resolves to the return value of `fn`
 
 ## Testing
 
