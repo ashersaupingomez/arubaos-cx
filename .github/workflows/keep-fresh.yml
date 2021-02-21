@@ -18,6 +18,7 @@ jobs:
           git config --global user.email "ashersaupingomez@gmail.com"
           git config --global user.name "Asher Gomez"
       - run: npm version patch
+      - run: npm install --ignore-scripts
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
