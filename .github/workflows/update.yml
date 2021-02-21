@@ -18,10 +18,10 @@ jobs:
     # Setup .npmrc file to publish to npm
     - uses: actions/setup-node@v2
       with:
-        node-version: '14.x'
-        check-latest: true
+        node-version: 14
         registry-url: 'https://registry.npmjs.org'
-    - run: npm version patch
-    - run: npm publish
+    - run: |
+        npm version patch
+        npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
