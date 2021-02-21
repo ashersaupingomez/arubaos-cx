@@ -1,11 +1,27 @@
-name: update
+name: Keep fresh
 on: [push, pull_request]
 
 jobs:
-  automerge:
+  auto-upgrade:
     runs-on: ubuntu-latest
     steps:
       - uses: fastify/github-action-merge-dependabot@v1.1.1
         if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
         with:
-          github-token: ${{secrets.github_token}}
+          github-token: ${{ secrets.github_token }}
+      - run: npm version patch
+          
+  build:
+    runs-on: ubuntu-latest
+    needs: [auto-upgrade]
+    steps:
+    - uses: actions/checkout@v2
+    # Setup .npmrc file to publish to npm
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm install
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
