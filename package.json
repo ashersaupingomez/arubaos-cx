@@ -1,8 +1,8 @@
 {
   "name": "arubaos-cx",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Superagent utilities for interacting with the ArubaOS-CX REST API",
-  "module": "index",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "node test"
